@@ -1,3 +1,73 @@
 .audio {
-  
+   position: relative;
+   
+   &__buttons {
+        justify-content: center;
+        flex: 0 0 auto;
+        display: flex;
+    }
+    
+    &__btn {
+        margin: 2rem 1rem 1rem 0;
+    }
+    
+    &__widget {
+        display:flex;
+        margin: 2rem 0;
+        border: 2px solid @primary-colour;
+    }
+
+    &__widget-image {
+        min-width: 25%;
+        max-width: 50%;
+        width: auto;
+        height: auto;
+        min-height: 260px;
+        max-height: 50vh;
+        object-fit: cover;
+    }
+
+    &__widget-content {
+        padding: 1rem 2rem;
+        display:flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    &__widget-name {
+        color: @primary-colour;
+    }
+
+    &__widget-transcript {
+        display: none;
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: @primary-colour;
+        color: @white;
+        padding: 2rem;
+
+        flex-direction: column;
+        justify-items: stretch;
+        align-items: stretch;
+
+        &.is-visible {
+            display:flex;
+        }
+    }
+
+    &__transcript-content {
+        color: @white;
+        flex: 1 1 auto;
+        margin-bottom: 2rem;
+        display:flex;
+    }
+
+    &__btn-sound:before {
+        font-family: "vanilla"; 
+        content: "\e95d"; 
+        font-size: 1.5em;
+    }
 }

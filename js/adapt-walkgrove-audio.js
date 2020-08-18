@@ -6,37 +6,59 @@ define([
 
   var AudioView = ComponentView.extend({
 
+    events: {
+      'click .js-audio-play-click': 'onPlayClicked',
+      'click .js-audio-transcript-click': 'onTranscriptClicked',
+      'click .js-audio-transcript-close-click': 'onCloseClicked'
+    },
+    
     preRender: function() {
       this.checkIfResetOnRevisit();
     },
 
     postRender: function() {
       this.setReadyStatus();
-
-      this.setupInview();
     },
 
-    setupInview: function() {
-      var selector = this.getInviewElementSelector();
-      if (!selector) {
-        this.setCompletionStatus();
-        return;
+    onPlayClicked: function(event) {
+      console.log("play audio: " + $(event.currentTarget).parent().data('index'));
+
+      for( var intItem in this.model.get( '_items' ) ) {
+        $('#audio-' + intItem + '')[0].pause();
       }
 
-      this.setupInviewCompletion(selector);
+      var index = $(event.currentTarget).parent().data('index');
+      $('#audio-' + intItem + '')[0].currentTime = 0;
+      $('#audio-' + index + '')[0].play();
+      
+      this.setItemVisited(index);
     },
 
-    /**
-     * determines which element should be used for inview logic - body, instruction or title - and returns the selector for that element
-     */
-    getInviewElementSelector: function() {
-      if (this.model.get('body')) return '.component__body';
+    onTranscriptClicked: function(event) {
+      var index = $(event.currentTarget).parent().data('index');
+      this.$('.audio__widget-transcript').removeClass('is-visible');
+      this.setItemVisited(index);
+      this.$('.audio__widget-transcript').eq(index).addClass('is-visible');
+    },
 
-      if (this.model.get('instruction')) return '.component__instruction';
+    onCloseClicked: function(event) {
+      var index = $(event.currentTarget).parent().data('index');
+      this.$('.audio__widget-transcript').eq(index).removeClass('is-visible');
+    },
 
-      if (this.model.get('displayTitle')) return '.component__title';
+    setItemVisited: function(index) {
+      this.$('.audio__widget').eq(index).addClass('is-visited');
+      this.checkAllItemsCompleted();
+    },
 
-      return null;
+    checkAllItemsCompleted: function() {
+      var complete = false;
+      if(this.$('.audio__widget').length === this.$('.is-visited').length){
+        complete = true;
+      }
+      if(complete) {
+        this.setCompletionStatus();
+      }
     },
 
     checkIfResetOnRevisit: function() {

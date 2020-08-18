@@ -1,3 +1,44 @@
 <div class="component__inner audio__inner">
   {{> component this}}
+
+  <div class="audio__main">
+  {{#each _items}}
+  <div class="audio__widget">
+    <img class="audio__widget-image" src="{{{_image}}}" />
+    <div class="audio__widget-content">
+      <h2 class="audio__widget-name">{{{name}}}</h2>
+      <div class="audio__widget-text">{{{content}}}</div>
+      <div class="audio__buttons button" data-index="{{_index}}">
+        <button class="audio__btn btn btn-sound js-audio-play-click" aria-label="{{{../playText}}}">
+          <div class="audio__btn-sound" />
+        </button>
+        <button class="audio__btn btn js-audio-transcript-click" aria-label="{{{../transcriptText}}}">
+          {{{../transcriptText}}}
+        </button>
+      </div>
+
+      <div class="audio__widget-audio">
+        <audio id="audio-{{_index}}">
+          <source src="{{{_mp3}}}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <div class="audio__widget-transcript">
+        <div class="audio__transcript-content">{{{transcript}}}</div>
+        <div class="audio__buttons button" data-index="{{_index}}">
+          <button class="audio__inverse-btn btn-inverse js-audio-transcript-close-click"  aria-label="{{{../closeText}}}">
+            {{{../closeText}}}
+          </button>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+  {{/each}}
+
+  </div>
+
+
 </div>
