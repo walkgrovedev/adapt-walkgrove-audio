@@ -4,7 +4,9 @@
   <div class="audio__main">
   {{#each _items}}
   <div class="audio__widget">
-    <img class="audio__widget-image" src="{{{_image}}}" />
+    <div class="audio__widget-image">
+      <img src="{{{_image}}}" />
+    </div>
     <div class="audio__widget-content">
       <h2 class="audio__widget-name">{{{name}}}</h2>
       <div class="audio__widget-text">{{{content}}}</div>
