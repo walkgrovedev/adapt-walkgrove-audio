@@ -5,7 +5,7 @@
   {{#each _items}}
   <div class="audio__widget">
     <div class="audio__widget-image">
-      <img src="{{{_image}}}" />
+      <img src="{{{_image}}}" {{#if alt}}aria-label="{{alt}}"{{else}}aria-hidden="true"{{/if}} />
     </div>
     <div class="audio__widget-content">
       <h2 class="audio__widget-name">{{{name}}}</h2>
