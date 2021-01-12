@@ -4,7 +4,7 @@
   <div class="audio__main">
   {{#each _items}}
   <div class="audio__widget">
-    <div class="audio__widget-image">
+    <div class="audio__widget-image"> 
       <img src="{{{_image}}}" {{#if alt}}aria-label="{{alt}}"{{else}}aria-hidden="true" alt=""{{/if}} />
     </div>
     <div class="audio__widget-content">
@@ -24,7 +24,7 @@
           <source src="{{{_mp3}}}" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
-      </div> --}}
+      </div> --}} 
 
       <div class="audio__widget-transcript">
         <div class="audio__transcript-content">{{{transcript}}}</div>
