@@ -103,11 +103,20 @@
         display:flex;
     }
 
-    
-
     &__btn-sound:before {
         font-family: "vanilla"; 
-        content: "\e95d"; 
+        content: "\e9ae";
         font-size: 1.5em;
+    }
+}
+
+.dir-rtl {
+    .audio__widget-content {
+        right: 30%;
+        left: auto;
+
+        @media (max-width: @device-width-small) {
+            right: 0;
+        }
     }
 }

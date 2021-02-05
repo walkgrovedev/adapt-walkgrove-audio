@@ -29,6 +29,92 @@
       "validators": [],
       "help": "This is the instruction text",
       "translatable": true
+    },
+    "_items": {
+      "type": "array",
+      "required": true,
+      "title": "Audio items",
+      "items": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "index": {
+            "type": "number",
+            "required": true,
+            "default": 0,
+            "title": "Audio item index",
+            "inputType": "Number",
+            "validators": ["required", "number"],
+            "help": "",
+            "translatable": true
+          },
+          "name": {
+            "type": "string",
+            "required": true,
+            "default": "",
+            "title": "Audio item display title",
+            "inputType": "Text",
+            "validators": [],
+            "help": "",
+            "translatable": true
+          },
+          "_image": {
+            "type": "string",
+            "required": true,
+            "default": "",
+            "title": "Audio item image URL",
+            "inputType": "Text",
+            "validators": [],
+            "help": "",
+            "translatable": false
+          },
+          "_mp3": {
+            "type": "string",
+            "required": true,
+            "default": "",
+            "title": "Audio item audio file URL",
+            "inputType": "Text",
+            "validators": [],
+            "help": "",
+            "translatable": false
+          },
+          "content": {
+            "type": "string",
+            "required": true,
+            "default": "",
+            "title": "Audio item content",
+            "inputType": "Text",
+            "validators": [],
+            "help": "",
+            "translatable": true
+          },
+          "transcript": {
+            "type": "string",
+            "required": true,
+            "default": "",
+            "title": "Audio item transcript",
+            "inputType": "Text",
+            "validators": [],
+            "help": "",
+            "translatable": true
+          }
+        }
+      }
+    },
+    "playText": {
+      "type": "string",
+      "required": true,
+      "translatable": true
+    },
+    "transcriptText": {
+      "type": "string",
+      "required": true,
+      "translatable": true
+    },
+    "closeText": {
+      "type": "string",
+      "required": true,
+      "translatable": true
     }
   }
 }

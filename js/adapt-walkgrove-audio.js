@@ -21,15 +21,31 @@ define([
     },
 
     onPlayClicked: function(event) {
-      console.log("play audio: " + $(event.currentTarget).parent().data('index'));
+      //audio?
+      if (Adapt.config.get('_sound')._isActive === true) {
+        Adapt.trigger('audio:stop');
+      }  
 
-      for( var intItem in this.model.get( '_items' ) ) {
-        $('#audio-' + intItem + '')[0].pause();
-      }
+      // for( var intItem in this.model.get( '_items' ) ) {
+      //   $('#audio-' + intItem + '')[0].pause();
+      // }
 
       var index = $(event.currentTarget).parent().data('index');
-      $('#audio-' + intItem + '')[0].currentTime = 0;
-      $('#audio-' + index + '')[0].play();
+
+      // USE CORE AUDIO
+      this.model.get( '_items' ).forEach((file, item) => {
+        if(item === index) {
+          Adapt.trigger('audio:partial', {src: file._mp3});
+          this.audio = item;
+        }
+      });
+
+      // $('#audio-' + intItem + '')[0].currentTime = 0;
+      // $('#audio-' + index + '')[0].play();
+      
+      // $('#audio-' + index + '')[0].addEventListener('ended', () => {
+      //   $('#audio-' + index + '')[0].removeEventListener('ended', () => {});
+      // }, false);
       
       this.setItemVisited(index);
     },
