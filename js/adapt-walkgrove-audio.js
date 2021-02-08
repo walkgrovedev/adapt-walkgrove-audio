@@ -55,11 +55,14 @@ define([
       this.$('.audio__widget-transcript').removeClass('is-visible');
       this.setItemVisited(index);
       this.$('.audio__widget-transcript').eq(index).addClass('is-visible');
+
+      this.$('.audio__transcript-content').eq(index).a11y_focus();
     },
 
     onCloseClicked: function(event) {
       var index = $(event.currentTarget).parent().data('index');
       this.$('.audio__widget-transcript').eq(index).removeClass('is-visible');
+      this.$('.audio__widget-name').eq(index).a11y_focus();
     },
 
     setItemVisited: function(index) {
