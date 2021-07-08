@@ -4,12 +4,12 @@
   <div class="audio__main">
   {{#each _items}}
   <div class="audio__widget">
-    <div class="audio__widget-image"> 
-      <img src="{{{_image}}}" {{#if alt}}aria-label="{{alt}}"{{else}}aria-hidden="true" alt=""{{/if}} />
+    <div class="audio__widget-image">
+      <img src="{{{_image}}}" {{#if alt}}aria-label="{{alt}}"{{else}} alt=""{{/if}} />
     </div>
     <div class="audio__widget-content">
-      <h2 class="audio__widget-name">{{{name}}}</h2>
-      <div class="audio__widget-text">{{{content}}}</div>
+      <h2 class="audio__widget-name" role="heading" aria-level="5" tabindex="0">{{{name}}}</h2>
+      <div class="audio__widget-text" tabindex="0">{{{content}}}</div>
       <div class="audio__buttons button" data-index="{{_index}}">
         <button class="audio__btn btn btn-sound js-audio-play-click" aria-label="{{{../playText}}}">
           <div class="audio__btn-sound" />
@@ -24,13 +24,12 @@
           <source src="{{{_mp3}}}" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
-      </div> --}} 
-
+      </div> --}}
 
       <div class="audio__widget-transcript">
-        <div class="audio__transcript-content">{{{transcript}}}</div>
+        <div class="audio__transcript-content" tabindex="0">{{{transcript}}}</div>
         <div class="audio__buttons button" data-index="{{_index}}">
-          <button class="audio__inverse-btn btn-inverse js-audio-transcript-close-click"  aria-label="{{{../closeText}}}">
+          <button class="audio__inverse-btn btn-inverse js-audio-transcript-close-click" aria-label="{{{../closeText}}}" tabindex="0">
             {{{../closeText}}}
           </button>
         </div>

@@ -11,6 +11,9 @@ define([
       'click .js-audio-transcript-click': 'onTranscriptClicked',
       'click .js-audio-transcript-close-click': 'onCloseClicked'
     },
+
+    _audioPlaying: false,
+    _audioIndexPlaying: -1,
     
     preRender: function() {
       this.checkIfResetOnRevisit();
@@ -22,23 +25,53 @@ define([
 
     onPlayClicked: function(event) {
       //audio?
-      if (Adapt.config.get('_sound')._isActive === true) {
-        Adapt.trigger('audio:stop');
-      }  
+      //if (Adapt.config.get('_sound')._isActive === true) {
+        
+        var index = $(event.currentTarget).parent().data('index');
 
-      // for( var intItem in this.model.get( '_items' ) ) {
-      //   $('#audio-' + intItem + '')[0].pause();
-      // }
+        //console.log(this._audioPlaying, this._audioIndexPlaying, index);
 
-      var index = $(event.currentTarget).parent().data('index');
+        if(this._audioPlaying === true) {
+          if(this._audioIndexPlaying !== index) {
+            Adapt.trigger('audio:stop');
+          }
+        } 
 
-      // USE CORE AUDIO
-      this.model.get( '_items' ).forEach((file, item) => {
-        if(item === index) {
-          Adapt.trigger('audio:partial', {src: file._mp3});
-          this.audio = item;
-        }
-      });
+        // for( var intItem in this.model.get( '_items' ) ) {
+        //   $('#audio-' + intItem + '')[0].pause();
+        // }
+
+        // USE CORE AUDIO
+        //if(this._audioPlaying === false) {
+          this.model.get( '_items' ).forEach((file, item) => {
+            if(item === index) {
+              if(this._audioIndexPlaying === item) {
+                
+                if(this._audioPlaying === true) {
+                  Adapt.trigger('audio:pause');
+                  this._audioPlaying = false;
+                  $(event.currentTarget).addClass('paused');
+                } else {
+                  Adapt.trigger('audio:play');
+                  this._audioPlaying = true;
+                  $(event.currentTarget).removeClass('paused');
+                  console.log("play already: " + this._audioIndexPlaying);
+                }
+
+              } else {
+
+                Adapt.trigger('audio:partial', {src: file._mp3});
+                this.audio = item;
+                $('.audio__btn').removeClass('paused');
+                this._audioIndexPlaying = item;
+                this._audioPlaying = true;
+                console.log("play new: " + this._audioIndexPlaying);
+
+              }
+            }
+          });
+        //}
+      //}
 
       // $('#audio-' + intItem + '')[0].currentTime = 0;
       // $('#audio-' + index + '')[0].play();
@@ -62,7 +95,7 @@ define([
     onCloseClicked: function(event) {
       var index = $(event.currentTarget).parent().data('index');
       this.$('.audio__widget-transcript').eq(index).removeClass('is-visible');
-      this.$('.audio__widget-name').eq(index).a11y_focus();
+      this.$('.js-audio-transcript-click').eq(index).a11y_focus(); //widget-name
     },
 
     setItemVisited: function(index) {
